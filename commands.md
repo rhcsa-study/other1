@@ -2,14 +2,19 @@
 ```
 Find files owned by no user or group and do not show errors
 find / -nouser -nogroup 2> /dev/null
+
 Mount device by UUID (manual)
 mount UUID="X" /mountpoint
+
 Mount device by UUID (fstab)
 UUID="X"   /mountpoint   ext4    defaults    0 2
+
 List user's open files
 lsof -u username
+
 Create a symbolic link (soft)
 ln -s source destination
+
 Create a symbolic link (hard)
 ln source destination
 ```
@@ -18,26 +23,37 @@ ln source destination
 ```
 Lock/Unlock user account
 usermod -L/-U username
+
 Add user to group(s)
 usermod -aG group username
+
 Change user's primary group
 usermod -g group username
+
 Create group with custom Group ID
 groupadd -g 1050 groupname
+
 Create custom system group
 groupadd -r groupname
+
 Force user password change upon next logon
 chage -d 0 username
+
 Display the date in 30 days
 date -d +30days
+
 Change group ownership of file
 chown :groupname filename
+
 Add users directly to /etc/group
 groupname:x:12345:user1,user2,user3
+
 Remove user from group
 gpasswd -d user apache
+
 Rename the user account from bob to jim and move the home directory respectively
 usermod -l jim -d /home/jim -m bob
+
 Configure the system so that user profiles are created with an empty file called "data"
 touch /etc/skel/data
 ```
@@ -46,37 +62,53 @@ touch /etc/skel/data
 ```
 Set file permissions to allow full access
 chmod 777 file
+
 Display umask in symbolic form
 umask -S
+
 Ensure all new files are created with 640 permissions and directories with 750 permissions for all users
 sed -i s/umask 022/umask 027/g /etc/profile
+
 Ensure all new files for user harry are created with 777 permissions
 echo 'umask 0' >> /home/harry/.bash_profile
+
 Save ACL permissions to file
 getfacl file > aclperms
+
 Set ACL permissions reading from a file
 getfacl file1 | setfacl --set-file=- file2
+
 Revoke all ACL permissions on a file
 setfacl -b file
+
 Grant the special bit group permissions on a file
 chmod g+s filename
+
 Recursively set the ACL permissions to grant all groups Read and Write permissions on a directory
 setfacl -R -m g::rw /directory
+
 Set the default ACL permissions to grant user1 Read, Write and Execute permissions on a directory
 setfacl -d -m u:user1:rwx /directory
+
 Prevent all users and groups from writing to file1 using ACLs
 setfacl -m mask::rx file1
+
 Grant the devs group Read, Execute permissions on a directory.  Ensure this change applies to files already with execute permissions.
 setfacl -Rm g:devs:rX /directory
+
 Prevent users who are not the owner from deletion of files in a directory
 chmod +t /directory
+
 Set the file permissions on file1 to have no group or owner
 chown nobody:nobody file1
+
 Which permission bit does a user need on a folder in order to cd into it?
 Execute
+
 What are the default permissions for files and folders?
 Files: 644   Folders: 775
 Starting point:  Files: 666   Folders: 777
+
 Which file would you use to set the umask permanently?
 /etc/profile
 ```
